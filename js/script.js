@@ -2,7 +2,7 @@
 
 $ (function() {
 
-  var $testItems = {
+  let $testItems = {
     testTitle: "Тест по программированию",
     questions: [
       {title: "С помощью какого объекта осуществляется доступ к локальному хранилищу в современных браузерах?",
@@ -25,17 +25,17 @@ $ (function() {
 
   localStorage.setItem('aq', JSON.stringify($testItems));
 
-  var $test = JSON.parse(localStorage.getItem('aq'));
+  let $test = JSON.parse(localStorage.getItem('aq'));
 
   localStorage.clear;
 
 // Template
 
-  var $tmpl = _.template(document.getElementById('test-form').innerHTML);
+  let $tmpl = _.template(document.getElementById('test-form').innerHTML);
 
-  var $result = $tmpl($test);
+  let $result = $tmpl($test);
 
-  var $target = document.getElementById('wrapper');
+  let $target = document.getElementById('wrapper');
 
   $target.innerHTML = $result;
 
@@ -43,29 +43,29 @@ $ (function() {
 
   function checkAnswers() {
 
-    var $answers = $('[type=checkbox]:checked').length;
-    var $correctlyAnswered = $('.correct-answer:checked').length;
+    let $answers = $('[type=checkbox]:checked').length;
+    let $correctlyAnswered = $('.correct-answer:checked').length;
 
     function countCorrectanswers() {
-        var number = 0;
-        for (var i=0; i<$test.questions.length; i++) {
+        let number = 0;
+        for (let i=0; i<$test.questions.length; i++) {
         number += $test.questions[i].correctAnswer.length;
         }
         return number;
     };
 
-    var $numberOfCorrectAnswers = countCorrectanswers();
+    let $numberOfCorrectAnswers = countCorrectanswers();
 
-    var scores = 0;
+    let scores = 0;
     if ($answers > $numberOfCorrectAnswers) {
       scores = Math.round(($correctlyAnswered / ($answers-$numberOfCorrectAnswers+1) / $numberOfCorrectAnswers) * 100) + '%';
     } else {
       scores = Math.round($correctlyAnswered / $numberOfCorrectAnswers * 100) + '%';
     }
 
-    var $result = 'Результат Вашего теста ' + $correctlyAnswered + '. Общий бал ' + scores;
-    var $modal = $('<div class="modal"><p>' + $result + '<p></div>');
-    var $overlay = $('<div class="overlay"></div>')
+    let $result = 'Результат Вашего теста ' + $correctlyAnswered + '. Общий бал ' + scores;
+    let $modal = $('<div class="modal"><p>' + $result + '<p></div>');
+    let $overlay = $('<div class="overlay"></div>')
 
     $overlay.one('click', hideModal);
     $modal.one('click', hideModal);
@@ -76,7 +76,7 @@ $ (function() {
         $overlay.remove();
     }
 
-    var $body = $('body')
+    let $body = $('body')
 
     $body.append($overlay);
     $body.append($modal);
